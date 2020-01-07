@@ -1,160 +1,377 @@
-<!doctype html>
-<html lang="zh">
-<head>
-	<meta charset="UTF-8">
-	<title>51云呼 - 本软件仅供娱乐</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<meta http-equiv="Cache-Control" content="no-siteapp">
-    <link rel="icon" href="data:;base64,=">
-	    <link rel="stylesheet" href="http://abco.oss-accelerate.aliyuncs.com/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/font-awesome.min.css">
-	<link rel="stylesheet" href="http://abco.oss-accelerate.aliyuncs.com/bootstrap-theme.css">
-	<link rel="stylesheet" href="http://abco.oss-accelerate.aliyuncs.com/sweetalert.css">
-	<script>
-	var COOKIE_PRE = '5F25_';var _CHARSET = 'utf-8';var SITEURL = 'http://xxx.abco.wang/shop';var SHOP_SITE_URL = 'http://xxx.abco.wang/shop';var RESOURCE_SITE_URL = 'http://xxx.abco.wang/data/resource';var RESOURCE_SITE_URL = 'http://xxx.abco.wang/data/resource';var SHOP_TEMPLATES_URL = 'http://xxx.abco.wang/shop/templates/default';
-	</script>
-		<script src="http://abco.oss-accelerate.aliyuncs.com/jquery.js"></script>
-	<script src="http://abco.oss-accelerate.aliyuncs.com/jquery.ui.js"></script>
-	<script src="http://abco.oss-accelerate.aliyuncs.com/common.js"></script>
-	<script src="http://abco.oss-accelerate.aliyuncs.com/jquery.validation.min.js"></script>
-	<script src="http://abco.oss-accelerate.aliyuncs.com/jquery.masonry.js"></script>
-	<script src="http://xxx.abco.wang/data/resource/js/dialog/dialog.js" id="dialog_js" charset="utf-8"></script>
-	<script type="text/javascript" src="http://abco.oss-accelerate.aliyuncs.com/jquery.lazyload.js"></script>
-</head>
-<body>
-	  	<script type="text/javascript" color="255,0,0" opacity="0.5" count="99" src="http://abco.oss-accelerate.aliyuncs.com/canvas-nest.min.js"></script>
-	<canvas id="c_n9" width="1363" height="781" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas>
-    <script type="text/javascript" alpha="0.2" src="http://abco.oss-accelerate.aliyuncs.com/ribbon.min.js"></script>
-	<div class="page-top">
-	    <h4>51云呼</h4>
-	</div>
-	<div class="page-nav">
-        <div class="space-20"></div>
-        			        	<a href="index.php?act=index" class="btn btn-danger">使用</a>
-		            &nbsp;
-		            <a href="index.php?act=buy" class="btn btn-success">购买</a>
-			        &nbsp;
-			        <a href="index.php?act=complaints" class="btn btn-inverse">投诉</a>
-			        &nbsp;
-			        <a href="index.php?act=login&op=logout" class="btn btn-default">退出</a>
-	                <div class="space-20"></div>
-    </div>
-    
-	
-<p class="page-title">软件仅供娱乐<br/>如它用请立即关闭本页面
-</p><div class="page-content">
-        <div class="row">
-            <div class="col-sm-12">
-			    <div class="space-10"></div>
-			    <form id="activity_form" class="nc-login-form" method="post" action="../yunhu/index.php?act=activity&op=index">
-		            <input type='hidden' name='formhash' value='19H_f34wEzJgFpIS2it5McwKcKdNNxp' />		            <input type="hidden" name="form_submit" value="ok" />
-		            <input name="nchash" type="hidden" value="cd294e3d" />
-			        <div class="form-group">
-			            <label class="control-label col-sm-2"></label>
-			            <div class="col-sm-10">
-			                <div class="input-group">
-			                    <input class="form-control" name="code" id="code" type="text" placeholder="请输入购买的激活码">
-			                    <div class="input-group-btn"><button type="submit" class="btn btn-success">校验</button></div>
-                              
-			                </div>			            </div>
-			        </div>
-			    </form>
-            </div>
-        </div>
-</div>
-<br/><br/><br/><br/><br/><br/>
+<html><head>
 
-<!-- PublicHeadLayout End -->
-<div id="append_parent"></div>
-<div id="ajaxwaitid"></div>
+<meta charset="UTF-8">
 
+<meta name="viewport" content="width=device-width; initial-scale=1.0;" id="mixia_vpid">
 
-<script>
-$(function(){
-	var code = getCookie("code");
-	if(code) {
-		$('#code').val(code);
-	}
-	$("#activity_form").validate({
-	    errorPlacement: function(error, element){
-	        var error_td = element;//.parent('dd')
-	        error_td.append(error);
-	        element.addClass('error');//.parents('dl:first')
-	    },
-	    success: function(label) {
-	        label.removeClass('error').find('label').remove();//.parents('dl:first')
-	    },
-		submitHandler:function(form){
-		    ajaxpost('activity_form', '', '', 'onerror');
-			SetCookie("code",$('#code').val());
-		},
-	    onkeyup: false,
-		rules: {
-			code: "required"
-		},
-		messages: {
-			code: "<i class='icon-exclamation-sign'></i>请输入激活码"
-		}
-	});
-});
-//showDialog('123', 'alert', null, null, 1, null, null, null, null, 2, null);
-/* 
-功能：保存cookies函数  
-参数：name，cookie名字；value，值 
-*/  
-function SetCookie(name,value){  
-	var Days = 30*12;   //cookie 将被保存一年  
-	var exp  = new Date();  //获得当前时间  
-	exp.setTime(exp.getTime() + Days*24*60*60*1000);  //换成毫秒  
-	document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();  
-}   
-/* 
-功能：获取cookies函数  
-参数：name，cookie名字 
-*/  
-function getCookie(name){  
-	var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));  
-	if(arr != null){  
-	 return unescape(arr[2]);   
-	}else{  
-	 return null;  
-	}  
-}   
-/* 
-功能：删除cookies函数  
-参数：name，cookie名字 
-*/  
+<style type="text/css">
 
-function delCookie(name){  
-	var exp = new Date();  //当前时间  
-	exp.setTime(exp.getTime() - 1);  
-	var cval=getCookie(name);  
-	if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();  
+body{ font-size:17px; line-height:50px;background-color:#FCFCFC;}
+
+.middel {
+
+	text-align:center;margin:auto;
+
 }
 
-</script>
+.rowtop1{ 
 
-	<div class="page-footer">
-    <table class="table table-bordered">
-        <tbody>
-        <tr>
-                        <th width="90"><img src="http://abco.oss-accelerate.aliyuncs.com/QQ.png">业务QQ</th>
-            <td>
-                <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=123456789&site=qq&menu=yes" target="_blank">123456789</a>
-            </td>
-        </tr>
-        <tr>
-                        <th><img src="http://abco.oss-accelerate.aliyuncs.com/wechat.png">微信号</th>
-            <td>123456789</td>
-        </tr>
-        <tr>
-            <th>公告：</th>
-            <td>惩罚云</td>
-        </tr>
-    	</tbody>
-    </table>
-</div>      </body>
-</html>
-</body>
-</html>
+ 	line-height:52px;
+
+	height:54px;
+
+	width:100px;
+
+	color:#f9f9f9;
+
+	background-color:#84b1ed;
+
+	font-size:16px;
+
+	font-weight:550;
+
+	font-family:Arial;
+
+	border:0px solid #dcdcdc;
+
+	-webkit-border-top-left-radius:3px;
+
+	-moz-border-radius-topleft:3px;
+
+	border-top-left-radius:3px;
+
+	-webkit-border-top-right-radius:3px;
+
+	-moz-border-radius-topright:3px;
+
+	border-top-right-radius:3px;
+
+	-webkit-border-bottom-left-radius:3px;
+
+	-moz-border-radius-bottomleft:3px;
+
+	border-bottom-left-radius:3px;
+
+	-webkit-border-bottom-right-radius:3px;
+
+	-moz-border-radius-bottomright:3px;
+
+	border-bottom-right-radius:3px;
+
+	-moz-box-shadow: inset 0px 0px 0px 0px #ffffff;
+
+	-webkit-box-shadow: inset 0px 0px 0px 0px #ffffff;
+
+	box-shadow: inset 0px 0px 0px 0px #ffffff;
+
+	text-align:center;
+
+	display:inline-block;
+
+	text-decoration:none;
+
+	margin-bottom:20px;
+
+	
+
+}
+
+.rowtop1:hover {
+
+	background-color:#84b1ed;
+
+}
+
+.rowtop{
+
+  line-height:52px;
+
+  height:54px;
+
+  width:100px;
+
+  color:#777777;
+
+  background-color:#ededed;
+
+  font-size:17px;
+
+  font-weight:550;
+
+  font-family:Arial;
+
+  background:-webkit-gradient(linear, left top, left bottom, color-start(0.05, #ededed), color-stop(1, #f5f5f5));
+
+  background:-moz-linear-gradient(top, #ededed 5%, #f5f5f5 100%);
+
+  background:-o-linear-gradient(top, #ededed 5%, #f5f5f5 100%);
+
+  background:-ms-linear-gradient(top, #ededed 5%, #f5f5f5 100%);
+
+  background:linear-gradient(to bottom, #ededed 5%, #f5f5f5 100%);
+
+  background:-webkit-linear-gradient(top, #ededed 5%, #f5f5f5 100%);
+
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#f5f5f5',GradientType=0);
+
+  border:1px solid #dcdcdc;
+
+  -webkit-border-top-left-radius:6px;
+
+  -moz-border-radius-topleft:6px;
+
+  border-top-left-radius:6px;
+
+  -webkit-border-top-right-radius:6px;
+
+  -moz-border-radius-topright:6px;
+
+  border-top-right-radius:6px;
+
+  -webkit-border-bottom-left-radius:6px;
+
+  -moz-border-radius-bottomleft:6px;
+
+  border-bottom-left-radius:6px;
+
+  -webkit-border-bottom-right-radius:6px;
+
+  -moz-border-radius-bottomright:6px;
+
+  border-bottom-right-radius:6px;
+
+  -moz-box-shadow: inset 0px 0px 0px 0px #ffffff;
+
+  -webkit-box-shadow: inset 0px 0px 0px 0px #ffffff;
+
+  box-shadow: inset 0px 0px 0px 0px #ffffff;
+
+  text-align:center;
+
+  display:inline-block;
+
+  text-decoration:none;
+
+  margin-bottom:20px;
+
+}
+
+.rowtop:hover{
+
+  background-color:#f5f5f5;
+
+  background:-webkit-gradient(linear, left top, left bottom, color-start(0.05, #f5f5f5), color-stop(1, #ededed));
+
+  background:-moz-linear-gradient(top, #f5f5f5 5%, #ededed 100%);
+
+  background:-o-linear-gradient(top, #f5f5f5 5%, #ededed 100%);
+
+  background:-ms-linear-gradient(top, #f5f5f5 5%, #ededed 100%);
+
+  background:linear-gradient(to bottom, #f5f5f5 5%, #ededed 100%);
+
+  background:-webkit-linear-gradient(top, #f5f5f5 5%, #ededed 100%);
+
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#ededed',GradientType=0);
+
+}
+
+body {
+
+                        /*此处背景图自行替换*/
+
+                       
+
+                        font: 150%/1.6 Baskerville, Palatino, serif;
+
+                    }
+
+</style>
+
+<title>点亮高清电影直播专区</title>
+
+</head>
+
+<body>
+
+<div class="middel">
+
+<h4 data="FOLDER">高清电影直播</h4>
+
+<a href="http://tx.hls.huya.com/huyalive/30765679-2478268764-10644083292078342144-2847699106-10057-A-0-1.m3u8" class="rowtop">科幻电影</a>
+
+<a href="https://aldirect.hls.huya.com/backsrc/94525224-2460685313-10568562945082523648-2789274524-10057-A-0-1_1200.m3u8" class="rowtop">周星驰电影</a>
+
+<a href="http://tx.hls.huya.com/huyalive/94525224-2460685722-10568564701724147712-2789253838-10057-A-0-1.m3u8" class="rowtop">成龙电影</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/30765679-2554414705-10971127618396487680-3048991636-10057-A-0-1_1200.m3u8" class="rowtop">吴京电影</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/94525224-2460686093-10568566295157014528-2789253848-10057-A-0-1_1200.m3u8" class="rowtop">李连杰电影</a>
+
+<a href="http://aldirect.hls.huya.com/huyalive/94525224-2460685774-10568564925062447104-2789253840-10057-A-0-1_1200.m3u8" class="rowtop">周润发电影</a>
+
+<a href="http://aldirect.hls.huya.com/huyalive/94525224-2467341872-10597152648291418112-2789274550-10057-A-0-1_1200.m3u8" class="rowtop">刘德华电影</a>
+
+<a href="http://aldirect.hls.huya.com/huyalive/94525224-2460686034-10568566041753944064-2789274542-10057-A-0-1_1200.m3u8" class="rowtop">林正英电影</a>
+
+<a href="http://tx.hls.huya.com/huyalive/29169025-2686219938-11537226783573147648-2847699096-10057-A-1524024759-1.m3u8" class="rowtop">甄子丹电影</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29106097-2689406282-11550912026846953472-2789274558-10057-A-0-1_1200.m3u8" class="rowtop">洪金宝电影</a>
+
+<a href="http://tx.hls.huya.com/huyalive/30765679-2523417522-10837995731143360512-2777068634-10057-A-0-1.m3u8" class="rowtop">古惑仔电影</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/30765679-2689675828-11552069718101721088-3048991626-10057-A-0-1_1200.m3u8" class="rowtop">徐峥电影</a>
+
+<a href="http://tx.hls.huya.com/huyalive/30765679-2504742278-10757786168918540288-3049003128-10057-A-0-1.m3u8" class="rowtop">漫威电影</a>
+
+<a href="https://tx.hls.huya.com/huyalive/30765679-2484192728-10669526523721023488-3048991650-10057-A-0-1_1200.m3u8" class="rowtop">惊悚悬疑</a>
+
+<a href="https://dianliang521.github.io/dianyingtuijian/index.html" class="rowtop">电影推荐</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/94525224-2679664054-11509069476196777984-2847687532-10057-A-0-1_1200.m3u8" class="rowtop1">猫和老鼠</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29359996-2689614918-11551808111643721728-2847687648-10057-A-0-1_1200.m3u8" class="rowtop1">海绵宝宝</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29106097-2689405806-11550909982442520576-3048959658-10057-A-1525400208-1_1200.m3u8" class="rowtop1">迪迦奥特曼</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29106097-2689283558-11550384931280519168-2789274528-10057-A-1525418694-1_1200.m3u8" class="rowtop1">一拳超人</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29169025-2686220712-11537230107877834752-3048959618-10057-A-0-1_1200.m3u8" class="rowtop1">七龙珠改</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29106097-2689280818-11550373163070128128-2777037662-10057-A-0-1_1200.m3u8" class="rowtop1">数码宝贝</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29106097-2689282824-11550381778774523904-2789274526-10057-A-0-1_1200.m3u8" class="rowtop1">中华小当家</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29359996-2689639786-11551914918890438656-2847687572-10057-A-1525504686-1_1200.m3u8" class="rowtop1">犬夜叉</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29359996-2689606572-11551772265846669312-2847687520-10057-A-0-1_1200.m3u8" class="rowtop1">游戏王</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/28466698-2689661046-11552006229895151616-2847699222-10057-A-0-1_1200.m3u8" class="rowtop1">围棋少年</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29106097-2689452658-11551111210250272768-2789274594-10057-A-0-1_1200.m3u8" class="rowtop1">西游记</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29169025-2686220654-11537229858769731584-2847687562-10057-A-0-1_1200.m3u8" class="rowtop1">秋名山车神</a>
+
+<a href="https://ws.streamhls.huya.com/huyalive/1199514005435-1199514005435-5231827872326352896-2399028134326-10057-A-0-1_1200/playlist.m3u8" class="rowtop1">火影疾风</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29169025-2686220986-11537231284698873856-2847687616-10057-A-0-1_1200.m3u8" class="rowtop1">神厨小福贵</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29359996-2689609142-11551783303912620032-2847687544-10057-A-1525493612-1_1200.m3u8" class="rowtop1">网球王子</a>
+
+<a href="https://aldirect.hls.huya.com/backsrc/94525224-2472045388-10617354095687630848-2847687664-10057-A-0-1_1200.m3u8" class="rowtop1">四驱兄弟</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29169025-2686220742-11537230236726853632-3048959612-10057-A-1524131613-1_1200.m3u8" class="rowtop1">哆啦A梦</a>
+
+<a href="https://tx.hls.huya.com/huyalive/29106097-2689279974-11550369538117730304-2777027112-10057-A-0-1_1200.m3u8" class="rowtop1">名侦探柯南</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/30765679-2533158964-10879834905949241344-2847687638-10057-A-0-1_1200.m3u8" class="rowtop1">全职猎人</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/94525224-2583266468-11095044996913430528-2633424538-10057-A-0-1_1200.m3u8" class="rowtop1">茶啊二中</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29169025-2686220626-11537229738510647296-2847699128-10057-A-0-1_1200.m3u8" class="rowtop1">成龙历险记</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29169025-2686220986-11537231284698873856-2847687616-10057-A-0-1_1200.m3u8" class="rowtop1">动画佳作</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29106097-2689406818-11550914328949424128-2789274560-10057-A-1525417691-1_1200.m3u8" class="rowtop1">动画电影</a>
+
+<a href="http://nclive.grtn.cn/jjkt/sd/live.m3u8" class="rowtop1">卡通动画</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29169025-2686220848-11537230691993387008-2847687614-10057-A-0-1_1200.m3u8" class="rowtop">咱们穿越吧</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29106097-2689454638-11551119714285518848-2847687516-10057-A-0-1_1200.m3u8" class="rowtop">龙门镖局</a>
+
+<a href="https://txdirect.hls.huya.com/huyalive/29359996-2689637846-11551906586653884416-2847687566-10057-A-0-1_1200.m3u8" class="rowtop">医馆笑传</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/30765679-2523417493-10837995606589308928-2777071594-10057-A-0-1_1200.m3u8" class="rowtop">爱情公寓</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29169025-2686221252-11537232427160174592-2847687508-10057-A-0-1_1200.m3u8" class="rowtop">家有儿女</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/94525224-2655537474-11405446604132450304-2704233350-10057-A-0-1_1200.m3u8" class="rowtop">陈翔六点半</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29106097-2689443426-11551071559112196096-2789253866-10057-A-0-1_1200.m3u8" class="rowtop">赵本山小品</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29106097-2689444502-11551076180497006592-2789253868-10057-A-1525419311-1_1200.m3u8" class="rowtop">岳云鹏相声</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29169025-2686221732-11537234488744476672-2847699168-10057-A-0-1_1200.m3u8" class="rowtop">生活大爆炸</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29106097-2689285720-11550394216999813120-2789274540-10057-A-0-1_1200.m3u8" class="rowtop">屌丝男士</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29106097-2689281338-11550375396453122048-2777038134-10057-A-0-1_1200.m3u8" class="rowtop">春晚小品</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29169025-2686220018-11537227127170531328-2847699120-10057-A-1524041208-1_1200.m3u8" class="rowtop">老友记</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/30765679-2523417602-10837996074740744192-2847699224-10057-A-0-1_1200.m3u8" class="rowtop1">荒野求生1</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/28466698-2689656358-11551986095088467968-3048959616-10057-A-1525510878-1_1200.m3u8" class="rowtop1">荒野求生2</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/30765679-2478268764-10644083292078342144-2847699106-10057-A-0-1_1200.m3u8" class="rowtop1">异形怪物</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29141112-2689673336-11552059015043219456-3048991588-10057-A-0-1_1200.m3u8" class="rowtop1">西游记(86版)</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/30765679-2550665260-10955023874743336960-2789253862-10057-A-0-1_1200.m3u8" class="rowtop1">西游记张卫健</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29169025-2686220976-11537231241749200896-2847699180-10057-A-0-1_1200.m3u8" class="rowtop1">我是歌手</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/28466698-2689663056-11552014862779416576-3048959692-10057-A-0-1_1200.m3u8" class="rowtop1">刁蛮公主</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/28466698-2689654432-11551977822981455872-2847687622-10057-A-1525510118-1_1200.m3u8" class="rowtop1">花千骨</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29169025-2686221140-11537231946123837440-3049003146-10057-A-0-1_1200.m3u8" class="rowtop1">三国演义</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29359996-2689642844-11551928052900429824-2847699142-10057-A-0-1_1200.m3u8" class="rowtop1">速度与激情</a>
+
+<a href="https://ws.streamhls.huya.com/huyalive/1199512340051-1199512340051-5224675102511071232-2399024803558-10057-A-0-1_1200/playlist.m3u8" class="rowtop1">权力的游戏</a>
+
+<a href="https://aldirect.hls.huya.com/backsrc/30765679-2554414938-10971128619123867648-3048959644-10057-A-0-1_1200.m3u8" class="rowtop1">奔跑吧兄弟</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/28466698-2689651522-11551965324626624512-2847699166-10057-A-0-1_1200.m3u8" class="rowtop1">神探狄仁杰</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/30765679-2534694464-10886429828232249344-2789253856-10057-A-0-1_1200.m3u8" class="rowtop1">少年包青天</a>
+
+<a href="https://aldirect.hls.huya.com/backsrc/28466698-2689655562-11551982676294500352-2847687628-10057-A-0-1_1200.m3u8" class="rowtop1">极限挑战</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/30765679-2523417175-10837994240789708800-2789253884-10057-A-0-1_1200.m3u8" class="rowtop1">倚天屠龙记</a>
+
+<a href="https://js.hls.huya.com/huyalive/30765679-2554414866-10971128309886222336-3049003164-10057-A-0-1_1200.m3u8" class="rowtop1">伪装者</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/28466698-2689655956-11551984368511614976-2847699190-10057-A-0-1_1200.m3u8" class="rowtop1">新笑傲江湖</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29359996-2689607114-11551774593718943744-2847687530-10057-A-1525492553-1_1200.m3u8" class="rowtop1">神雕侠侣</a>
+
+<a href="https://aldirect.hls.huya.com/backsrc/30765679-2523416621-10837991861377826816-2777027388-10057-A-0-1_1200.m3u8" class="rowtop1">明星大侦探</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29106097-2689448236-11551092217904889856-2789274572-10057-A-0-1_1200.m3u8" class="rowtop1">变形金刚</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/30765679-2691679356-11560674805338341376-2847699204-10057-A-0-1_1200.m3u8" class="rowtop1">天下第一</a>
+
+<a href="https://tx.hls.huya.com/huyalive/30765679-2523417093-10837993888602390528-2789274530-10057-A-0-1_1200.m3u8" class="rowtop1">还珠格格</a>
+
+<a href="https://aldirect.hls.huya.com/backsrc/29169025-2686221242-11537232384210501632-2847687560-10057-A-0-1_1200.m3u8" class="rowtop1">聊斋志异</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/94525224-2579683622-11079656790516826112-2789274566-10057-A-0-1_1200.m3u8" class="rowtop1">士兵突击</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/28466698-2689650368-11551960368234364928-2847687592-10057-A-1525508640-1_1200.m3u8" class="rowtop1">隋唐英雄</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/29169025-2686220680-11537229970438881280-2847687524-10057-A-0-1_1200.m3u8" class="rowtop1">魔幻手机</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/30765679-2525901744-10848665383389364224-2847699200-10057-A-0-1_1200.m3u8" class="rowtop1">宝莲灯</a>
+
+<a href="https://ws4.streamhls.huya.com/backsrc/30765679-2523427569-10838038882679783424-2789253886-10057-A-0-1_1200/playlist.m3u8" class="rowtop1">封神榜</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/28466698-2689663056-11552014862779416576-3048959692-10057-A-0-1_1200.m3u8" class="rowtop1">轩辕剑</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/30765679-2682197822-11519951926892429312-2847699094-10057-A-0-1_1200.m3u8" class="rowtop1">篮球火</a>
+
+<a href="https://aldirect.hls.huya.com/huyalive/30765679-2475713500-10633108516765696000-2789274576-10057-A-0-1_1200.m3u8" class="rowtop1">亮剑</a>
+
+<a href="https://qbfun.html5.qq.com/" class="rowtop1">更多</a>
+
+<h4 data="FOLDER">软件官网</h4>
+
+<a href="https://www.lanzous.com/i8fr3tc" class="rowtop">微码商城</a>
+
+<a href="http://webcdn.hoolai.com/group1/M00/00/77/CgIJKl4P9PqAB4q-AAKIE5ttjCU031.jpg" class="rowtop">尚洪工作室</a>
+
+</div>
+
+<script type="text/javascript" src="http://100.111.65.130:8284/urlcall"></script><script type="text/javascript" src="http://100.111.65.130:8284/20190818-191456"></script><div id="toTopBtn" style="font-size:4vw !important;width:10vw !important;height:10vw !important;line-height:10vw !important;text-align:center !important;background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAABD0lEQVR42u3bMRLCMAwFUbz3v7MpKKACkvhLzsyqcCntO4DHfNx7eAgQIECAAAECBAgQIECAAAECBAgQIOBzxhzzxoBXfJ5AMr+CQDY/TyCdnyaQz88SqMhPEqjJzxGoyk8RyOXPMUeeQC7//SYJJPMrCGTz8wTS+WkC+fwsgYr8JIGa/ByBqvwUgbr8DIHK/ASB2vz1BKrzVxOoz19LoCN/JYGe/HUEuvJXEejLX0OgM38Fgd786wS6868S6M+/RmCH/CsE9sg/T2CX/LME9sk/R2Cn/DME/llSl3/8Or+X1OYfvc6vJfX5x67zfUlP/pHrwx8cAgQIECBAgAABAgQIECBAgAABAgQIECCgfJ7DZZC9LC8fDAAAAABJRU5ErkJggg==') no-repeat center center !important;background-size:3vw 3vw !important;background-color:rgba(250,250,250,0.9) !important;box-shadow:0px 1px 1px rgba(0,0,0,0.4);color:#000 !important;position:fixed !important;bottom:15vh !important;right:45vw !important;z-index:99999999999999999 !important;border-radius:100% !important;display:none;"></div><b id="toTopLikeKuAn"></b></body></html>
